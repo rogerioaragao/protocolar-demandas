@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abertura de Protocolo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        // Função para mostrar o campo "Outro" e os subassuntos quando necessário
+        function toggleAssunto() {
+            const assuntoSelect = document.getElementById('assunto');
+            const subassuntoSelect = document.getElementById('subassunto');
+            const outroAssuntoDiv = document.getElementById('outroAssuntoDiv');
+            const assuntoValue = assuntoSelect.value;
+
+            // Esconde o campo "Outro Assunto" caso o usuário escolha um assunto predefinido
+            if (assuntoValue === 'outro') {
+                outroAssuntoDiv.style.display = 'block';
+            } else {
+                outroAssuntoDiv.style.display = 'none';
+            }
+
+            // Atualiza as opções de subassunto com base no assunto escolhido
+            let subassuntos = [];
+            if (assuntoValue === 'lixo_entulho') {
+                subassuntos = [
+                    'Coleta de lixo doméstico e comercial',
+                    'Limpeza de Lotes Públicos',
+                    'Retirada de Entulhos'
+                ];
+            } else if (assuntoValue === 'rocagem') {
+                subassuntos = [
+                    'Roçagem de terrenos baldios',
+                    'Roçagem de áreas públicas',
+                    'Roçagem de beiras de estrada',
+                    'Manutenção de áreas verdes',
+                    'Controle de vegetação invasiva'
+                ];
+            } else if (assuntoValue === 'iluminacao_publica') {
+                subassuntos = [
+                    'Manutenção de lâmpadas queimadas',
+                    'Substituição de iluminação pública por LED',
+                    'Reforma de quadras e praças públicas'
+                ];
+            } else if (assuntoValue === 'patrolagem') {
+                subassuntos = [
+                    'Manutenção de estradas rurais',
+                    'Nivelamento de ruas e avenidas',
+                    'Conserto de buracos e ondulações',
+                    'Reparo em vias de terra',
+                    'Abertura de novos caminhos'
+                ];
+            } else if (assuntoValue === 'limpeza_terreno') {
+                subassuntos = [
+                    'Limpeza de terrenos com vegetação alta',
+                    'Retirada de entulho e lixo',
+                    'Combate ao mosquito da dengue',
+                    'Descarte inadequado de resíduos'
+                ];
+            } else if (assuntoValue === 'poda_arvore') {
+                subassuntos = [
+                    'Poda de árvores de grande porte',
+                    'Remoção de galhos secos e doentes',
+                    'Poda de árvores para segurança pública',
+                    'Podas de árvores ornamentais e frutíferas'
+                ];
+            } else if (assuntoValue === 'gradear_terra') {
+                subassuntos = [
+                    'Gradagem de áreas agrícolas',
+                    'Uso de tratores e implementos agrícolas',
+                    'Melhoria da estrutura do solo',
+                    'Gradagem para construção de jardins e paisagismo'
+                ];
+            } else if (assuntoValue === 'tapa_buracos') {
+                subassuntos = [
+                    'Reparação de buracos em asfalto',
+                    'Reparo de calçadas danificadas',
+                    'Substituição de pavimento deteriorado',
+                    'Colocação de material asfáltico',
+                    'Manutenção preventiva de vias urbanas'
+                ];
+            } else if (assuntoValue === 'aterro') {
+                subassuntos = [
+                    'Preenchimento de buracos e depressões',
+                    'Aterro para construção de fundações',
+                    'Aterro em áreas públicas e parques',
+                    'Aterro para regularização de terrenos'
+                ];
+            } else if (assuntoValue === 'quebra_molas') {
+                subassuntos = [
+                    'Instalação de quebra-molas em áreas residenciais',
+                    'Manutenção de quebra-molas deteriorados',
+                    'Estudos sobre a eficácia de quebra-molas',
+                    'Criação de sinalização de segurança viária',
+                    'Redução de velocidade em áreas de escolas e hospitais'
+                ];
+            }
+
+            // Limpa as opções de subassuntos atuais
+            subassuntoSelect.innerHTML = '';
+
+            // Preenche as opções de subassuntos
+            subassuntos.forEach(subassunto => {
+                const option = document.createElement('option');
+                option.value = subassunto.toLowerCase().replace(/ /g, '_');
+                option.textContent = subassunto;
+                subassuntoSelect.appendChild(option);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h3>Abertura de Protocolo</h3>
+        <form action="processar_form.php" method="post" enctype="multipart/form-data">
+            <div class="alert alert-warning">
+                <strong>* Campos Obrigatórios</strong><br>
+                Descreva abaixo a sua solicitação:
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Assunto *</label>
+                <select class="form-select" id="assunto" name="assunto" required onchange="toggleAssunto()">
+                    <option value="lixo_entulho">Retirada de Lixo / Entulho</option>
+                    <option value="rocagem">Roçagem</option>
+                    <option value="iluminacao_publica">Iluminação Pública</option>
+                    <option value="patrolagem">Patrolagem</option>
+                    <option value="limpeza_terreno">Limpeza de Terreno</option>
+                    <option value="poda_arvore">Poda de Árvore</option>
+                    <option value="gradear_terra">Gradear Terra</option>
+                    <option value="tapa_buracos">Tapa Buracos</option>
+                    <option value="aterro">Aterro</option>
+                    <option value="quebra_molas">Quebra-Molas</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Subassunto *</label>
+                <select class="form-select" name="subassunto" id="subassunto" required>
+                    <!-- Subassuntos serão adicionados dinamicamente -->
+                </select>
+            </div>
+
+            <div class="mb-3" id="outroAssuntoDiv" style="display:none;">
+                <label class="form-label">Outro Assunto</label>
+                <input type="text" class="form-control" name="outro_assunto">
+            </div>
+
+            <h5>Informações do Local</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Logradouro *</label>
+                <input type="text" class="form-control" name="logradouro" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bairro *</label>
+                <input type="text" class="form-control" name="bairro" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ponto de Referência</label>
+                <input type="text" class="form-control" name="referencia">
+            </div>
+
+            <h5>Anexos</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Outros Documentos</label>
+                <input type="file" class="form-control" name="documentos">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição da Solicitação *</label>
+                <textarea class="form-control" name="descricao" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Enviar Solicitação</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

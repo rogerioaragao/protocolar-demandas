@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro e Solicitações</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Cadastro e Login</h1>
+
+    <!-- Mensagem de sucesso ou erro -->
+    <div id="message" style="display: none; padding: 10px; margin-bottom: 20px;"></div>
+
+    <div class="form-container" id="login-form">
+      <h3>Login</h3>
+      <form id="login" onsubmit="return login()">
+        <input type="email" id="email" placeholder="E-mail" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+        <input type="password" id="password" placeholder="Senha" required minlength="6">
+        <button type="submit">Entrar</button>
+      </form>
+      <p>Não tem uma conta? <a href="javascript:void(0)" onclick="showForm('register')">Cadastre-se</a></p>
+    </div>
+
+    <div class="form-container" id="register-form" style="display: none;">
+      <h3>Cadastro</h3>
+      <form id="register" onsubmit="return register()">
+        <input type="text" id="name" placeholder="Nome Completo" required>
+        <input type="email" id="email-register" placeholder="E-mail" required pattern="^[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,}$">
+        <input type="password" id="password-register" placeholder="Senha" required minlength="6">
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p>Já tem uma conta? <a href="javascript:void(0)" onclick="showForm('login')">Faça login</a></p>
+    </div>
+
+    <div class="form-container" id="service-form" style="display: none;">
+      <h2>Solicitação de Serviço</h2>
+      <form id="solicitacao" onsubmit="return submitServiceRequest()">
+        <textarea id="descricao" placeholder="Descreva o serviço" required></textarea>
+        <button type="submit">Enviar Solicitação</button>
+      </form>
+    </div>
+
+    <div id="loading" style="display: none;">
+      <p>Carregando...</p>
+    </div>
+
+    <div id="solicitacoes-list" style="display: none;">
+      <h2>Minhas Solicitações</h2>
+      <ul id="list"></ul>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
